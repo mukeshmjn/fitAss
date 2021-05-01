@@ -7,8 +7,8 @@
 <div style="margin-left: 24%;">
   <button type="button" class="btn btn-primary" (click)="openCreate(create)">Create Contact</button>
 </div>
-
-<table class="table table-striped table-borderless table-hover table-responsive mt-5" >
+<div class="overflow-auto">
+<table class="table table-striped table-borderless table-hover overflow-auto mt-5" style="width:70%;margin: auto;">
   <thead>
     <tr>
       <th scope="col">Name</th>
@@ -26,7 +26,7 @@
     </tr>
   </tbody>
 </table>
-
+</div>
 <form [formGroup]="contactform" (ngSubmit)="onSubmit()">
 <ng-template #create let-modal>
   <div class="modal-header">
