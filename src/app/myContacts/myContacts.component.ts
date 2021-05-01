@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ContactsService } from '../services/contacts.service';
+import { ToastrService } from 'ngx-toastr';
+import  Swal  from 'sweetalert2';
 @Component({
   selector: 'app-myContacts',
   templateUrl: './myContacts.component.html',
@@ -9,7 +11,7 @@ import { ContactsService } from '../services/contacts.service';
 })
 export class MyContactsComponent implements OnInit {
 
-  constructor(private modalService: NgbModal,private cs : ContactsService) { }
+  constructor(private modalService: NgbModal,private cs : ContactsService,private toastr: ToastrService) { }
   closeResult: string;
   contactform : FormGroup;
   contacts:any;
@@ -80,6 +82,7 @@ console.log('submittteeed')
 var data = this.contactform.value;
 this.cs.createContact(data).subscribe(res=>{
   console.log('created: ',res)
+  this.toastr.success('Successfully!', 'Contact created!');
   this.contactform.setValue({
     name:'',
     email:'',
@@ -89,9 +92,26 @@ this.cs.createContact(data).subscribe(res=>{
 }
 
 deleteContact(data){
-  this.cs.deleteContact(data).subscribe(res=>{
-    console.log(res)
+  Swal.fire({
+    title: 'Are you sure you want to delete the contact?',
+    showDenyButton: true,
+   // showCancelButton: true,
+    confirmButtonText: `Yes`,
+    denyButtonText: `No`,
+  }).then((result) => {
+ 
+    if (result.isConfirmed) {
+      this.cs.deleteContact(data).subscribe(res=>{
+    this.toastr.success('Successfully!', 'Contact deleted!');
   })
+      
+    } else if (result.isDenied) {
+      // Swal.fire('Changes are not saved', '', 'info')
+    }
+  })
+  // this.cs.deleteContact(data).subscribe(res=>{
+  //   console.log(res)
+  // })
 }
 
 getSigleContact(data,content){
@@ -116,6 +136,7 @@ editContact(){
   data.id = this.singleContact.id;
   this.cs.editContact(data).subscribe(res=>{
     console.log(res);
+    this.toastr.success('Successfully!', 'Contact edited!');
   })
 }
 }
