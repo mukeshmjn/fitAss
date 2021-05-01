@@ -77,7 +77,7 @@
  
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary" (click)="modal.close(onSubmit())">Save</button>
+    <button type="submit" class="btn btn-primary" [disabled]="contactform.invalid" (click)="modal.close(onSubmit())">Save</button>
   </div>
 </ng-template>
 
@@ -130,7 +130,7 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="modal.close(editContact())">Save</button>
+    <button type="button" class="btn btn-primary" [disabled]="contactform.invalid" (click)="modal.close(editContact())">Edit</button>
   </div>
 </ng-template>
 </form>
