@@ -14,7 +14,8 @@ export class MyContactsComponent implements OnInit {
   contactform : FormGroup;
   contacts:any;
   singleContact:any;
-
+  term:any;
+  
   ngOnInit() {
     this.initForm();
     this.getContacts();

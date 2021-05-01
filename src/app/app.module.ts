@@ -8,7 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-
+// import { NgSearchPipe } from 'ng-search-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [	
     AppComponent,
@@ -21,6 +22,8 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig, 'bookstore'),
     AngularFirestoreModule,
     FormsModule,
+    
+    Ng2SearchPipeModule,
     ReactiveFormsModule
   ],
   providers: [],
